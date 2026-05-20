@@ -1,5 +1,5 @@
 ---
-title: Data Structures — Trees
+title: Data Structures  Trees
 date: 2026-05-20
 excerpt: Notes on tree anatomy, types, traversals, and complexity.
 ---
@@ -32,7 +32,7 @@ A tree where each node has at most **2 children**.
 
 ### Self-Balancing Trees
 
-- **AVL Tree:** balance factor ∈ {-1, 0, 1}. Strictly balanced — best for frequent searches.
+- **AVL Tree:** balance factor ∈ {-1, 0, 1}. Strictly balanced best for frequent searches.
 - **Red-Black Tree:** relaxed balancing rules. Used in C++ `std::map` and Java `TreeMap` — best for frequent insert/delete.
 
 ### Storage & Search Trees
