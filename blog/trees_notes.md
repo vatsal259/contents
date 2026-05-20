@@ -4,129 +4,91 @@ date: 2026-05-20
 excerpt: Notes on tree anatomy, types, traversals, and complexity.
 ---
 
-# 🌳 Data Structures: Trees
+A **tree** is a non-linear, hierarchical data structure consisting of nodes connected by edges. Unlike arrays or linked lists, trees allow for efficient searching and structured data organization. These notes cover the core anatomy, common variants, traversal patterns, and complexity trade-offs.
 
-## 📖 Definition
-A **tree** is a non-linear, hierarchical data structure consisting of nodes connected by edges. Unlike arrays or linked lists, trees allow for efficient searching and structured data organization.
+## Anatomy of a Tree
 
----
+- **Root:** the topmost node (has no parent)
+- **Edge:** the connection between two nodes
+- **Parent:** a node that has children
+- **Child:** a node derived from another node
+- **Sibling:** nodes sharing the same parent
+- **Leaf (External Node):** a node with no children
+- **Internal Node:** a node with at least one child
+- **Height:** longest path from a node to a leaf
+- **Depth:** distance from root to a node
+- **Degree:** number of children of a node
 
-## 📐 Anatomy of a Tree
+## Classification of Trees
 
-- **Root:** The topmost node (has no parent)
-- **Edge:** The connection between two nodes
-- **Parent:** A node that has children
-- **Child:** A node derived from another node
-- **Sibling:** Nodes sharing the same parent
-- **Leaf (External Node):** A node with no children
-- **Internal Node:** A node with at least one child
-- **Height:** Longest path from a node to a leaf
-- **Depth:** Distance from root to a node
-- **Degree:** Number of children of a node
-
----
-
-## 🗂️ Classification of Trees
-
-### 1. 🌿 Binary Trees (Foundation)
+### Binary Trees (Foundation)
 
 A tree where each node has at most **2 children**.
 
-#### Types:
-- **Binary Search Tree (BST):**
-  - Left child < Parent < Right child
-  - **Use Case:** Fast lookup, sorted data
-  - **Complexity:**
-    - Average: O(log n)
-    - Worst: O(n)
+- **Binary Search Tree (BST):** left child < parent < right child. Used for fast lookup on sorted data. Average O(log n), worst O(n).
+- **Full Binary Tree:** each node has either 0 or 2 children.
+- **Complete Binary Tree:** all levels filled except possibly the last (filled left to right).
+- **Perfect Binary Tree:** all internal nodes have 2 children and all leaves are at the same level.
 
-- **Full Binary Tree:**
-  - Each node has either 0 or 2 children
+### Self-Balancing Trees
 
-- **Complete Binary Tree:**
-  - All levels filled except possibly last (filled left to right)
+- **AVL Tree:** balance factor ∈ {-1, 0, 1}. Strictly balanced — best for frequent searches.
+- **Red-Black Tree:** relaxed balancing rules. Used in C++ `std::map` and Java `TreeMap` — best for frequent insert/delete.
 
-- **Perfect Binary Tree:**
-  - All internal nodes have 2 children and all leaves are at same level
+### Storage & Search Trees
 
----
+- **B-Tree / B+ Tree:** optimized for disk access. Used in databases and file systems.
+- **Trie (Prefix Tree):** used for autocomplete and spell check.
 
-### 2. ⚖️ Self-Balancing Trees (Smart Trees)
+## Tree Traversals
 
-- **AVL Tree:**
-  - Balance factor ∈ {-1, 0, 1}
-  - Strictly balanced
-  - Best for frequent searches
+Depth-first traversals:
 
-- **Red-Black Tree:**
-  - Relaxed balancing rules
-  - Used in C++ std::map and Java TreeMap
-  - Best for frequent insert/delete
+- **Inorder:** Left → Node → Right
+- **Preorder:** Node → Left → Right
+- **Postorder:** Left → Right → Node
 
----
+Breadth-first traversal:
 
-### 3. 💾 Storage & Search Trees (Workhorses)
+- **Level Order:** uses a queue
 
-- **B-Tree / B+ Tree:**
-  - Optimized for disk access
-  - Used in databases and file systems
+## Binary Search Tree (BST)
 
-- **Trie (Prefix Tree):**
-  - Used for autocomplete and spell check
+Properties:
 
----
-
-## 🔁 Tree Traversals
-
-### Depth-First Traversals
-
-- Inorder: Left → Node → Right
-- Preorder: Node → Left → Right
-- Postorder: Left → Right → Node
-
-### Breadth-First Traversal
-
-- Level Order (uses queue)
-
----
-
-## 🌲 Binary Search Tree (BST)
-
-### Properties:
 - Left subtree values < root
 - Right subtree values > root
 
-### Operations:
+Operations (balanced case):
+
 - Search: O(log n)
 - Insert: O(log n)
 - Delete: O(log n)
 
----
+## Common Tree Problems
 
-## 🧠 Common Tree Problems
-
-- Check if tree is balanced
-- Find height of tree
+- Check if a tree is balanced
+- Find the height of a tree
 - Lowest Common Ancestor (LCA)
-- Diameter of tree
+- Diameter of a tree
 - Path sum problems
 
+## Performance Comparison
+
+| Tree Type       | Search   | Insertion | Space | Best For                 |
+|-----------------|----------|-----------|-------|--------------------------|
+| BST             | O(log n) | O(log n)  | O(n)  | Simple sorted data       |
+| AVL Tree        | O(log n) | O(log n)  | O(n)  | Fast lookups             |
+| Red-Black Tree  | O(log n) | O(log n)  | O(n)  | Frequent updates         |
+| B-Tree          | O(log n) | O(log n)  | O(n)  | Databases / disk storage |
+| Trie            | O(L)     | O(L)      | O(AL) | Strings / autocomplete   |
+
+## Key Takeaways
+
+- Trees are hierarchical structures that trade linear simplicity for fast, structured access.
+- Choose a BST for simple sorted data, a self-balancing tree (AVL / Red-Black) when worst-case guarantees matter, and B-Trees or Tries for disk-backed or string-heavy workloads.
+- Mastering the four traversal patterns unlocks most interview-style tree problems.
+
 ---
 
-## 📊 Performance Comparison
-
-| Tree Type        | Search        | Insertion     | Space | Best For                     |
-|-----------------|--------------|--------------|------|------------------------------|
-| BST             | O(log n)     | O(log n)     | O(n) | Simple sorted data           |
-| AVL Tree        | O(log n)     | O(log n)     | O(n) | Fast lookups                 |
-| Red-Black Tree  | O(log n)     | O(log n)     | O(n) | Frequent updates             |
-| B-Tree          | O(log n)     | O(log n)     | O(n) | Databases / Disk storage     |
-| Trie            | O(L)         | O(L)         | O(AL)| Strings / Autocomplete       |
-
----
-
-## 🚀 Next Steps
-
-- Practice traversal problems
-- Implement BST from scratch
-- Solve LCA and diameter problems
+Next steps: practice traversal problems, implement a BST from scratch, and solve LCA and diameter problems to internalize the patterns above.
