@@ -1,10 +1,10 @@
 ---
 title: "Embabel Agent Framework: Build Smarter AI Agents on the JVM"
 date: 2025-05-21
-excerpt: A deep-dive into Embabel — the JVM-native agent framework that replaces brittle workflows with type-driven, goal-oriented AI planning. Learn the core concepts, write your first agent, and understand why it's a step ahead of LangGraph, CrewAI, and similar tools.
+excerpt: A deep-dive into Embabel - the JVM-native agent framework that replaces brittle workflows with type-driven, goal-oriented AI planning. Learn the core concepts, write your first agent, and understand why it's a step ahead of LangGraph, CrewAI, and similar tools.
 ---
 
-AI agents have gone from research curiosity to production reality in less than two years. But with that speed came a wave of brittle, hand-stitched workflows — rigid state machines, prompt spaghetti, and opaque execution paths that are nearly impossible to test or debug.
+AI agents have gone from research curiosity to production reality in less than two years. But with that speed came a wave of brittle, hand-stitched workflows: rigid state machines, prompt spaghetti, and opaque execution paths that are nearly impossible to test or debug.
 
 [Embabel](https://github.com/embabel/embabel-agent) is a new agent framework built by Rod Johnson (the creator of Spring) and contributors, designed specifically for the JVM. It treats agent orchestration as a first-class engineering problem: strong typing, dynamic planning, testability, and deep Spring integration. This post walks through everything you need to understand, configure, and build with it.
 
@@ -14,13 +14,13 @@ AI agents have gone from research curiosity to production reality in less than t
 
 LLMs are powerful, but raw LLM calls aren't agents. Real-world agent systems need:
 
-- **Explainability** — why did the agent make the choices it did?
-- **Discoverability** — how do we reliably route between tools without confusing the model?
-- **LLM mixing** — different tasks deserve different models; one "God model" is wasteful and expensive
-- **Guardrails** — the ability to intercept and constrain execution at any point
-- **Composability** — agents that compose into larger federations
+- **Explainability** - why did the agent make the choices it did?
+- **Discoverability** - how do we reliably route between tools without confusing the model?
+- **LLM mixing** - different tasks deserve different models; one "God model" is wasteful and expensive
+- **Guardrails** - the ability to intercept and constrain execution at any point
+- **Composability** - agents that compose into larger federations
 
-Embabel solves all of these at the framework level, so you don't rebuild them on every project. It also introduces a concept called **"code agency"** alongside "LLM agency" — the idea that code and LLMs share the decision-making, rather than the LLM orchestrating everything.
+Embabel solves all of these at the framework level, so you don't rebuild them on every project. It also introduces a concept called **"code agency"** alongside "LLM agency", the idea that code and LLMs share the decision-making, rather than the LLM orchestrating everything.
 
 ---
 
@@ -28,15 +28,15 @@ Embabel solves all of these at the framework level, so you don't rebuild them on
 
 Embabel models agentic flows around four building blocks:
 
-**Actions** are the steps an agent can take. They are plain Java or Kotlin methods annotated with `@Action`. An action takes typed inputs and produces typed outputs — and those types are the whole trick.
+**Actions** are the steps an agent can take. They are plain Java or Kotlin methods annotated with `@Action`. An action takes typed inputs and produces typed outputs and those types are the whole trick.
 
 **Goals** define what an agent is trying to achieve. A method annotated with both `@Action` and `@AchievesGoal` signals the terminal step of an agent's work.
 
-**Conditions** are boolean evaluations that the planner checks before and after actions. Most of the time you don't write them explicitly — they're inferred automatically from method signatures.
+**Conditions** are boolean evaluations that the planner checks before and after actions. Most of the time you don't write them explicitly, they're inferred automatically from method signatures.
 
 **Domain Objects** are the strongly-typed data structures that flow between actions. They're not just dumb DTOs: they can carry behavior and expose methods to LLMs via `@Tool` annotations.
 
-Together, these let Embabel construct an **execution plan** — a sequence of actions to reach a goal — using a real AI planning algorithm (A\* GOAP), not a hand-written state machine.
+Together, these let Embabel construct an **execution plan** a sequence of actions to reach a goal using a real AI planning algorithm (A\* GOAP), not a hand-written state machine.
 
 ---
 
@@ -59,7 +59,7 @@ Practically this means: adding a new action to your codebase *automatically* mak
 
 ## Your First Agent: Seeing Type-Driven Flow in Action
 
-Here's a complete, annotated example straight from the Embabel examples repo — a `StarNewsFinder` that takes someone's star sign and writes a personalized news summary based on their horoscope:
+Here's a complete, annotated example straight from the Embabel examples repo  a `StarNewsFinder` that takes someone's star sign and writes a personalized news summary based on their horoscope:
 
 ```java
 @Agent(description = "Find news based on a person's star sign")
@@ -85,7 +85,7 @@ public class StarNewsFinder {
 
     @Action
     public Horoscope retrieveHoroscope(StarPerson starPerson) {
-        // Regular Spring service — no LLM needed here
+        // Regular Spring service no LLM needed here
         return new Horoscope(horoscopeService.dailyHoroscope(starPerson.sign()));
     }
 
@@ -134,13 +134,13 @@ No YAML pipeline. No graph nodes. No `chain.pipe(step1).pipe(step2)`. The types 
 
 ## The Blackboard: Shared State Done Right
 
-Every agent process has a **Blackboard** — a shared, immutable key-value store indexed by type. Actions read their inputs from the blackboard (injected automatically by parameter type) and write their outputs back to it (automatically, from the return value).
+Every agent process has a **Blackboard** - a shared, immutable key-value store indexed by type. Actions read their inputs from the blackboard (injected automatically by parameter type) and write their outputs back to it (automatically, from the return value).
 
 Key properties:
 
-- Objects are indexed by type, not by string key — no magic maps
+- Objects are indexed by type, not by string key, no magic maps
 - Latest object of a given type is the default; all versions are kept for history
-- Once added, objects are immutable — new versions can be added but old ones aren't mutated
+- Once added, objects are immutable and new versions can be added but old ones aren't mutated
 - The blackboard drives planning: an action becomes eligible when all its required input types are present
 
 You rarely interact with the blackboard directly. The framework handles it. But understanding it explains why Embabel's data flow is so much cleaner than string-keyed context bags.
@@ -149,7 +149,7 @@ You rarely interact with the blackboard directly. The framework handles it. But 
 
 ## Domain Objects with Behavior
 
-This is one of Embabel's most distinctive ideas. Domain objects aren't just data carriers — they can expose methods to LLMs via `@Tool`:
+This is one of Embabel's most distinctive ideas. Domain objects aren't just data carriers, they can expose methods to LLMs via `@Tool`:
 
 ```java
 @Entity
@@ -170,12 +170,12 @@ public class Customer {
             .sum() > 1000.0;
     }
 
-    // This stays private — not exposed to the LLM
+    // This stays private not exposed to the LLM
     private void updateLoyaltyLevel() { ... }
 }
 ```
 
-When this `Customer` object is passed to an action that calls an LLM, the LLM can invoke `getLoyaltyDiscount()` and `isPremiumEligible()` as tools — but `updateLoyaltyLevel()` stays hidden. You decide what the model can see and call. This is **selective tool exposure**, and it's a big deal for both capability and safety.
+When this `Customer` object is passed to an action that calls an LLM, the LLM can invoke `getLoyaltyDiscount()` and `isPremiumEligible()` as tools but `updateLoyaltyLevel()` stays hidden. You decide what the model can see and call. This is **selective tool exposure**, and it's a big deal for both capability and safety.
 
 ---
 
@@ -294,7 +294,7 @@ public class WriteAndReviewAgent {
 }
 ```
 
-You're not stuck choosing one model per application. Every LLM call is independently configured — model, temperature, persona, tool groups. This is critical for cost, quality, and privacy (e.g. using a local Ollama model for a sensitive step).
+You're not stuck choosing one model per application. Every LLM call is independently configured model, temperature, persona, tool groups. This is critical for cost, quality, and privacy (e.g. using a local Ollama model for a sensitive step).
 
 ---
 
@@ -327,13 +327,13 @@ class WriteAndReviewAgentTest {
 }
 ```
 
-`FakeOperationContext` and `FakePromptRunner` intercept LLM calls and let you inspect prompts, temperature, tool group assignments, and more — all without a real API call. For integration testing, Embabel builds on Spring's testing infrastructure, including Testcontainers support.
+`FakeOperationContext` and `FakePromptRunner` intercept LLM calls and let you inspect prompts, temperature, tool group assignments and more, all without a real API call. For integration testing, Embabel builds on Spring's testing infrastructure, including Testcontainers support.
 
 ---
 
 ## Tool Groups and MCP Integration
 
-Embabel introduces **tool groups** as a layer of indirection: your action doesn't ask for "Brave Search" — it asks for `CoreToolGroups.WEB`, and the framework resolves that to whatever web tool is available in the current environment.
+Embabel introduces **tool groups** as a layer of indirection: your action doesn't ask for "Brave Search", it asks for `CoreToolGroups.WEB`, and the framework resolves that to whatever web tool is available in the current environment.
 
 ```java
 @Action(toolGroups = {CoreToolGroups.WEB})
@@ -394,12 +394,12 @@ var invocation = AgentInvocation.builder(agentPlatform)
 
 ## Key Takeaways
 
-- **Type-driven planning**: Embabel infers the execution plan from Java method signatures alone — no graph wiring, no YAML pipelines
+- **Type-driven planning**: Embabel infers the execution plan from Java method signatures alone, no graph wiring, no YAML pipelines
 - **GOAP + replanning**: After every action, the planner re-evaluates the world state and can take a completely different path to the goal
-- **Domain objects with behavior**: `@Tool` on domain object methods gives LLMs selective access to business logic — with full encapsulation control
-- **Per-action LLM mixing**: Different actions can use different models, temperatures, and personas — optimal cost and quality for every step
+- **Domain objects with behavior**: `@Tool` on domain object methods gives LLMs selective access to business logic with full encapsulation control
+- **Per-action LLM mixing**: Different actions can use different models, temperatures, and personas for optimal cost and quality for every step
 - **First-class testability**: Agents are POJOs; `FakeOperationContext` lets you test prompts and hyperparameters without a real LLM
-- **Deep Spring integration**: All of Spring's ecosystem — DI, AOP, transactions, Testcontainers — works exactly as expected
+- **Deep Spring integration**: All of Spring's ecosystem  DI, AOP, transactions, Testcontainers to works exactly as expected
 
 ---
 
@@ -408,6 +408,6 @@ var invocation = AgentInvocation.builder(agentPlatform)
 - [Embabel Agent Examples Repository](https://github.com/embabel/embabel-agent-examples)
 - [Java Agent Template](https://github.com/embabel/java-agent-template)
 - [Kotlin Agent Template](https://github.com/embabel/kotlin-agent-template)
-- [Rod Johnson's Medium — Embabel: A New Agent Platform For the JVM](https://medium.com/@springrod/embabel-a-new-agent-platform-for-the-jvm-1c83402e0014)
-- [Rod Johnson's Medium — The Embabel Vision](https://medium.com/@springrod/the-embabel-vision-967654f13793)
-- [GOAP — Goal Oriented Action Planning](https://en.wikipedia.org/wiki/Goal-oriented_action_planning)
+- [Rod Johnson's Medium - Embabel: A New Agent Platform For the JVM](https://medium.com/@springrod/embabel-a-new-agent-platform-for-the-jvm-1c83402e0014)
+- [Rod Johnson's Medium - The Embabel Vision](https://medium.com/@springrod/the-embabel-vision-967654f13793)
+- [GOAP - Goal Oriented Action Planning](https://en.wikipedia.org/wiki/Goal-oriented_action_planning)
