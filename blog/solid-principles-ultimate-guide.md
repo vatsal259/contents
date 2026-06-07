@@ -1,5 +1,5 @@
 ---
-title: The Ultimate Guide to SOLID Principles - Write Java Code That Lasts
+title: The Ultimate Guide to SOLID Principles
 date: 2026-06-07
 excerpt: A deep-dive into all five SOLID principles with real-world analogies, bad vs. good code comparisons, and complete Java examples. Learn how to write clean, maintainable, and extensible software that your future self will thank you for.
 ---
