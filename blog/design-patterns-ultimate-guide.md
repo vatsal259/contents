@@ -1,30 +1,30 @@
 ---
-title: The Ultimate Guide to Design Patterns — Every Pattern You Need to Know (With Java)
+title: The Ultimate Guide to Design Patterns - Every Pattern You Need to Know (With Java)
 date: 2026-06-07
-excerpt: A deep-dive into all 23 GoF design patterns — Creational, Structural, and Behavioral — explained with real-world analogies, UML intent, and complete Java code examples. Your one-stop reference for writing better, scalable software.
+excerpt: A deep-dive into all 23 GoF design patterns - Creational, Structural, and Behavioral, explained with real-world analogies, UML intent, and complete Java code examples. Your one-stop reference for writing better, scalable software.
 ---
 
 If you've been writing Java for a while, you've almost certainly *used* design patterns without realizing it. Every time you call `Collections.sort()` with a `Comparator`, that's the **Strategy** pattern. Every time you build a `StringBuilder`, that echoes the **Builder** pattern. Every time Spring wires up your beans, it's the **Factory** and **Singleton** patterns at work.
 
-Design patterns are not abstract theory — they are *crystallized wisdom* from decades of software engineering. This guide covers all **23 Gang of Four (GoF) design patterns** with real-world analogies, clear intent, when to use them (and when *not* to), and complete Java code you can run today.
+Design patterns are not abstract theory - they are *crystallized wisdom* from decades of software engineering. This guide covers all **23 Gang of Four (GoF) design patterns** with real-world analogies, clear intent, when to use them (and when *not* to), and complete Java code you can run today.
 
 ---
 
 ## What Is a Design Pattern?
 
-> A design pattern is a general, reusable solution to a commonly occurring problem in software design. It is not finished code — it is a template for how to solve a problem.
+> A design pattern is a general, reusable solution to a commonly occurring problem in software design. It is not finished code - it is a template for how to solve a problem.
 
 Think of it this way:
 
-- An **algorithm** is like a cooking recipe — step-by-step instructions to achieve a goal.
-- A **design pattern** is like a blueprint — it shows the structure of the solution, but the exact implementation is up to you.
+- An **algorithm** is like a cooking recipe - step-by-step instructions to achieve a goal.
+- A **design pattern** is like a blueprint - it shows the structure of the solution, but the exact implementation is up to you.
 
 Patterns have four essential elements:
 
-1. **Name** — a handle that captures the essence of the pattern
-2. **Problem** — the context and conditions where the pattern applies
-3. **Solution** — the arrangement of classes, objects, and responsibilities
-4. **Consequences** — the trade-offs and results of applying the pattern
+1. **Name** - a handle that captures the essence of the pattern
+2. **Problem** - the context and conditions where the pattern applies
+3. **Solution** - the arrangement of classes, objects, and responsibilities
+4. **Consequences** - the trade-offs and results of applying the pattern
 
 ### Classification
 
@@ -38,7 +38,7 @@ The GoF organized 23 patterns into three categories:
 
 ---
 
-# Part I — Creational Patterns
+# Part I - Creational Patterns
 
 Creational patterns deal with **object creation**. They abstract the instantiation process, making your system independent of how its objects are created, composed, and represented.
 
@@ -58,7 +58,7 @@ A logistics company (the creator) needs to deliver packages. By road? By sea? By
 - You want to encapsulate object creation to reduce duplication.
 
 ### When NOT to Use
-- If the product hierarchy is flat and unlikely to change — a simple `new` is fine.
+- If the product hierarchy is flat and unlikely to change - a simple `new` is fine.
 - Overusing it adds unnecessary indirection.
 
 ### Java Implementation
@@ -136,7 +136,7 @@ Sending SMS to +1234567890: Your OTP is 4821
 ```
 
 ### Key Takeaway
-Factory Method follows the **Open/Closed Principle** — add new notification types without changing existing code.
+Factory Method follows the **Open/Closed Principle** - add new notification types without changing existing code.
 
 ---
 
@@ -146,7 +146,7 @@ Factory Method follows the **Open/Closed Principle** — add new notification ty
 Provide an interface for creating *families* of related or dependent objects without specifying their concrete classes.
 
 ### Real-World Analogy
-A furniture store sells Victorian-style and Modern-style furniture. You need a *matching* Chair + Sofa + Table. An Abstract Factory ensures you always get furniture from the same style family — you won't accidentally pair a Victorian chair with a Modern table.
+A furniture store sells Victorian-style and Modern-style furniture. You need a *matching* Chair + Sofa + Table. An Abstract Factory ensures you always get furniture from the same style family - you won't accidentally pair a Victorian chair with a Modern table.
 
 ### When to Use
 - Your system needs to be independent of how its products are created.
@@ -203,7 +203,7 @@ class MacFactory implements GUIFactory {
     @Override public Checkbox createCheckbox() { return new MacCheckbox(); }
 }
 
-// Client — only knows the abstract interfaces
+// Client - only knows the abstract interfaces
 class Application {
     private Button button;
     private Checkbox checkbox;
@@ -245,7 +245,7 @@ public class AbstractFactoryDemo {
 Separate the construction of a complex object from its representation so that the same construction process can create different representations.
 
 ### Real-World Analogy
-Ordering a burger at a restaurant. You don't cook it yourself — you tell the chef (Director) your requirements: "extra cheese, no onions, whole wheat bun." The chef uses a Builder to assemble your specific burger step by step.
+Ordering a burger at a restaurant. You don't cook it yourself - you tell the chef (Director) your requirements: "extra cheese, no onions, whole wheat bun." The chef uses a Builder to assemble your specific burger step by step.
 
 ### When to Use
 - Constructors with too many parameters (the "telescoping constructor" anti-pattern).
@@ -342,7 +342,7 @@ public class BuilderDemo {
 Specify the kinds of objects to create using a prototypical instance, and create new objects by *copying* this prototype.
 
 ### Real-World Analogy
-Cell division. A cell doesn't create a brand-new cell from scratch — it copies itself (clones). The new cell is a near-perfect copy that can then differentiate.
+Cell division. A cell doesn't create a brand-new cell from scratch - it copies itself (clones). The new cell is a near-perfect copy that can then differentiate.
 
 ### When to Use
 - Object creation is expensive (complex initialization, DB calls, heavy computation).
@@ -400,7 +400,7 @@ public class PrototypeDemo {
             List.of("READ", "WRITE", "DELETE")
         );
 
-        // Clone and customize — no expensive re-initialization
+        // Clone and customize - no expensive re-initialization
         UserProfile alice = adminTemplate.clone();
         alice.setName("Alice");
 
@@ -416,7 +416,7 @@ public class PrototypeDemo {
 ```
 
 ### Deep Clone vs Shallow Clone
-Always implement **deep cloning** for objects with mutable fields (Lists, Maps, other objects). Java's `Object.clone()` only does a shallow copy by default — this is a common bug.
+Always implement **deep cloning** for objects with mutable fields (Lists, Maps, other objects). Java's `Object.clone()` only does a shallow copy by default - this is a common bug.
 
 ---
 
@@ -437,7 +437,7 @@ A country can only have one official government. No matter who asks, they get a 
 - They violate the Single Responsibility Principle.
 - Overuse is a code smell. Prefer dependency injection.
 
-### Java Implementation — Thread-Safe Double-Checked Locking
+### Java Implementation - Thread-Safe Double-Checked Locking
 
 ```java
 public class DatabaseConnectionPool {
@@ -470,7 +470,7 @@ public class DatabaseConnectionPool {
     }
 }
 
-// Better alternative — Initialization-on-demand holder (Bill Pugh Singleton)
+// Better alternative - Initialization-on-demand holder (Bill Pugh Singleton)
 public class ConfigManager {
     private final Properties config = new Properties();
 
@@ -479,7 +479,7 @@ public class ConfigManager {
         config.setProperty("app.version", "1.0");
     }
 
-    // Inner class is only loaded when getInstance() is called — thread-safe, no synchronization overhead
+    // Inner class is only loaded when getInstance() is called - thread-safe, no synchronization overhead
     private static class Holder {
         static final ConfigManager INSTANCE = new ConfigManager();
     }
@@ -507,7 +507,7 @@ public class SingletonDemo {
 
 ---
 
-# Part II — Structural Patterns
+# Part II - Structural Patterns
 
 Structural patterns deal with **object composition**. They explain how to assemble objects and classes into larger structures while keeping those structures flexible and efficient.
 
@@ -519,7 +519,7 @@ Structural patterns deal with **object composition**. They explain how to assemb
 Convert the interface of a class into another interface that clients expect. Adapter lets classes work together that couldn't otherwise because of incompatible interfaces.
 
 ### Real-World Analogy
-A power adapter lets your laptop charger (European plug) work in a US outlet. The adapter doesn't change the plug or the outlet — it translates between them.
+A power adapter lets your laptop charger (European plug) work in a US outlet. The adapter doesn't change the plug or the outlet - it translates between them.
 
 ### When to Use
 - Integrating a third-party library with an incompatible interface.
@@ -549,7 +549,7 @@ class LegacyXmlParser {
     }
 }
 
-// Adapter — makes LegacyXmlParser look like a JsonParser
+// Adapter - makes LegacyXmlParser look like a JsonParser
 class XmlToJsonAdapter implements JsonParser {
     private final LegacyXmlParser xmlParser;
 
@@ -570,7 +570,7 @@ class XmlToJsonAdapter implements JsonParser {
     }
 }
 
-// Client — only knows JsonParser
+// Client - only knows JsonParser
 class DataProcessor {
     private final JsonParser parser;
 
@@ -686,7 +686,7 @@ public class BridgeDemo {
         circle.draw();  // Vector circle
         square.draw();  // Raster square
 
-        // Swap renderer at runtime — without changing Shape code
+        // Swap renderer at runtime - without changing Shape code
         circle = new Circle(new RasterRenderer(), 5, 5, 10);
         circle.draw();  // Now raster circle
     }
@@ -875,7 +875,7 @@ public class DecoratorDemo {
 ```
 
 ### Real-World Java Examples
-- `java.io`: `BufferedInputStream(new FileInputStream(...))` — classic Decorator stack
+- `java.io`: `BufferedInputStream(new FileInputStream(...))` - classic Decorator stack
 - `Collections.unmodifiableList()`, `synchronizedList()`
 
 ---
@@ -890,7 +890,7 @@ Ordering pizza by phone. You don't need to know about the dough team, the sauce 
 
 ### When to Use
 - To provide a simple interface to a complex body of code.
-- Layering your system — present a clean API to higher-level code.
+- Layering your system - present a clean API to higher-level code.
 - Reducing dependencies on internal subsystems.
 
 ### Java Implementation
@@ -922,7 +922,7 @@ class BitrateReader {
     }
 }
 
-// Facade — simple interface for the complex video conversion subsystem
+// Facade - simple interface for the complex video conversion subsystem
 class VideoConversionFacade {
     private VideoDecoder decoder = new VideoDecoder();
     private AudioMixer mixer = new AudioMixer();
@@ -969,7 +969,7 @@ A forest in a video game with thousands of trees. You don't store full tree data
 import java.util.HashMap;
 import java.util.Map;
 
-// Flyweight (intrinsic state — shared)
+// Flyweight (intrinsic state - shared)
 class CharacterStyle {
     private final String font;
     private final int size;
@@ -982,7 +982,7 @@ class CharacterStyle {
     }
 
     public void render(char character, int x, int y) {
-        System.out.printf("Rendering '%c' at (%d,%d) — font=%s, size=%d, color=%s%n",
+        System.out.printf("Rendering '%c' at (%d,%d) - font=%s, size=%d, color=%s%n",
                 character, x, y, font, size, color);
     }
 }
@@ -1002,7 +1002,7 @@ class CharacterStyleFactory {
     public static int getCount() { return styles.size(); }
 }
 
-// Context (extrinsic state — unique per character)
+// Context (extrinsic state - unique per character)
 class Character {
     private final char value;
     private final int x, y;
@@ -1024,7 +1024,7 @@ public class FlyweightDemo {
     public static void main(String[] args) {
         List<Character> document = new ArrayList<>();
 
-        // Thousands of characters — but only a few style objects
+        // Thousands of characters - but only a few style objects
         document.add(new Character('H', 0, 0, "Arial", 12, "black"));
         document.add(new Character('e', 10, 0, "Arial", 12, "black"));
         document.add(new Character('l', 20, 0, "Arial", 12, "black"));
@@ -1047,13 +1047,13 @@ public class FlyweightDemo {
 Provide a surrogate or placeholder for another object to control access to it.
 
 ### Types of Proxy
-- **Virtual Proxy** — lazy initialization (expensive object created on demand)
-- **Protection Proxy** — access control
-- **Remote Proxy** — represents an object in a different address space
-- **Caching Proxy** — caches results of expensive operations
-- **Logging/Monitoring Proxy** — logs requests
+- **Virtual Proxy** - lazy initialization (expensive object created on demand)
+- **Protection Proxy** - access control
+- **Remote Proxy** - represents an object in a different address space
+- **Caching Proxy** - caches results of expensive operations
+- **Logging/Monitoring Proxy** - logs requests
 
-### Java Implementation — Caching Proxy
+### Java Implementation - Caching Proxy
 
 ```java
 // Subject interface
@@ -1061,7 +1061,7 @@ interface WeatherService {
     String getWeather(String city);
 }
 
-// Real Subject (expensive — makes network calls)
+// Real Subject (expensive - makes network calls)
 class RealWeatherService implements WeatherService {
     @Override
     public String getWeather(String city) {
@@ -1108,7 +1108,7 @@ public class ProxyDemo {
 
 ---
 
-# Part III — Behavioral Patterns
+# Part III - Behavioral Patterns
 
 Behavioral patterns deal with **communication and algorithms between objects**. They focus on how objects collaborate and distribute responsibility.
 
@@ -1208,7 +1208,7 @@ public class ChainOfResponsibilityDemo {
 Encapsulate a request as an object, thereby letting you parameterize clients with different requests, queue or log requests, and support undoable operations.
 
 ### Real-World Analogy
-A restaurant order. The waiter (invoker) takes the order (command object) and passes it to the kitchen (receiver). The waiter doesn't know how to cook — they just carry the command. Orders can be queued, tracked, and even cancelled.
+A restaurant order. The waiter (invoker) takes the order (command object) and passes it to the kitchen (receiver). The waiter doesn't know how to cook - they just carry the command. Orders can be queued, tracked, and even cancelled.
 
 ### When to Use
 - Implementing undo/redo.
@@ -1261,7 +1261,7 @@ class InsertTextCommand implements Command {
     public void undo() { editor.deleteText(position, text.length()); }
 }
 
-// Invoker — with undo/redo support
+// Invoker - with undo/redo support
 class EditorHistory {
     private final Deque<Command> history = new ArrayDeque<>();
     private final Deque<Command> redoStack = new ArrayDeque<>();
@@ -1314,12 +1314,12 @@ public class CommandDemo {
 Provide a way to access elements of a collection sequentially without exposing its underlying representation.
 
 ### Real-World Analogy
-A TV remote. You press "next" to go to the next channel. You don't need to know how the channels are stored internally (array, list, database) — you just iterate.
+A TV remote. You press "next" to go to the next channel. You don't need to know how the channels are stored internally (array, list, database) - you just iterate.
 
 ### Java Implementation
 
 ```java
-// Java already has java.util.Iterator — let's implement a custom one
+// Java already has java.util.Iterator - let's implement a custom one
 
 class NumberRange implements Iterable<Integer> {
     private final int start;
@@ -1460,7 +1460,7 @@ public class MediatorDemo {
 Without violating encapsulation, capture and externalize an object's internal state so that the object can be restored to that state later.
 
 ### Real-World Analogy
-Video game checkpoints. You save your game state at a checkpoint (memento). If you die, you restore from the last save — without the game engine exposing all its internals.
+Video game checkpoints. You save your game state at a checkpoint (memento). If you die, you restore from the last save - without the game engine exposing all its internals.
 
 ### Java Implementation
 
@@ -1897,21 +1897,21 @@ A data mining framework. The overall process is fixed: open file → parse data 
 // Abstract Class with Template Method
 abstract class DataMiner {
 
-    // Template method — the skeleton
+    // Template method - the skeleton
     public final void mine(String path) {
         System.out.println("=== Mining: " + path + " ===");
         String rawData = extractData(path);
         String parsedData = parseData(rawData);
         analyzeData(parsedData);
-        sendReport(parsedData);  // hook — has default implementation
+        sendReport(parsedData);  // hook - has default implementation
     }
 
-    // Abstract steps — must be implemented by subclasses
+    // Abstract steps - must be implemented by subclasses
     protected abstract String extractData(String path);
     protected abstract String parseData(String rawData);
     protected abstract void analyzeData(String data);
 
-    // Hook — optional override
+    // Hook - optional override
     protected void sendReport(String data) {
         System.out.println("Sending default report...");
     }
@@ -1991,7 +1991,7 @@ A tax inspector visiting different business entities (shops, banks, factories). 
 ### Java Implementation
 
 ```java
-// Visitor interface — one method per element type
+// Visitor interface - one method per element type
 interface ShapeVisitor {
     double visit(Circle circle);
     double visit(Rectangle rectangle);
@@ -2041,7 +2041,7 @@ class AreaCalculator implements ShapeVisitor {
     @Override public double visit(Triangle t) { return 0.5 * t.base * t.height; }
 }
 
-// Concrete Visitor 2: Perimeter Calculator (new operation — no Shape changes needed!)
+// Concrete Visitor 2: Perimeter Calculator (new operation - no Shape changes needed!)
 class PerimeterCalculator implements ShapeVisitor {
     @Override public double visit(Circle c) { return 2 * Math.PI * c.radius; }
     @Override public double visit(Rectangle r) { return 2 * (r.width + r.height); }
@@ -2165,7 +2165,7 @@ public class InterpreterDemo {
 
 # Quick Reference: When to Use Which Pattern
 
-## Creational — "How do I create this object?"
+## Creational - "How do I create this object?"
 
 | Problem | Pattern |
 |---|---|
@@ -2175,7 +2175,7 @@ public class InterpreterDemo {
 | Creating objects is expensive; need cheap copies | Prototype |
 | Need exactly one instance globally | Singleton |
 
-## Structural — "How do these pieces fit together?"
+## Structural - "How do these pieces fit together?"
 
 | Problem | Pattern |
 |---|---|
@@ -2187,7 +2187,7 @@ public class InterpreterDemo {
 | Huge number of similar fine-grained objects | Flyweight |
 | Control access to an object | Proxy |
 
-## Behavioral — "How do these objects communicate?"
+## Behavioral - "How do these objects communicate?"
 
 | Problem | Pattern |
 |---|---|
@@ -2206,10 +2206,10 @@ public class InterpreterDemo {
 
 ## Key Takeaways
 
-- Design patterns are **not copy-paste code** — they are reusable *concepts* you adapt to your context.
+- Design patterns are **not copy-paste code** - they are reusable *concepts* you adapt to your context.
 - The three categories represent three dimensions of design: **creation, composition, and communication**.
 - Patterns come with trade-offs. A Singleton is simple but hostile to testing. A Decorator is flexible but deep stacks are hard to debug.
-- You already use patterns daily — every `Iterator`, every Spring `@Bean`, every `Collections.sort()` with a `Comparator`.
+- You already use patterns daily - every `Iterator`, every Spring `@Bean`, every `Collections.sort()` with a `Comparator`.
 - **Over-engineering is real.** Don't introduce a pattern where a simple class or method will do.
 - The best way to learn patterns is to **recognize them in codebases you already use** (Spring, Hibernate, Java standard library) and gradually introduce them when the problem clearly fits.
 
