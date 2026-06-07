@@ -1,6 +1,6 @@
 ---
-title: The Ultimate Guide to Design Patterns - Every Pattern You Need to Know (With Java)
-date: 2026-06-07
+title: The Ultimate Guide to Design Patterns - Every Pattern You Need to Know
+date: 2026-06-06
 excerpt: A deep-dive into all 23 GoF design patterns - Creational, Structural, and Behavioral, explained with real-world analogies, UML intent, and complete Java code examples. Your one-stop reference for writing better, scalable software.
 ---
 
