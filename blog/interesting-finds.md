@@ -1,6 +1,6 @@
 ---
 title: Papers That Made Me Think
-date: 2026-06-09
+date: 2025-06-09
 pinned: true
 excerpt: A curated, ever-growing list of research papers worth your time.
 ---
@@ -15,5 +15,3 @@ A living document. Every time I read a paper that breaks my mental model, it goe
 **Topics:** LLM Agents · Skill Adaptation · Failure Attribution · Training-Free Learning · Long-Horizon Tasks
 
 ---
-
-<!-- ADD NEW ENTRIES ABOVE THIS LINE -->
