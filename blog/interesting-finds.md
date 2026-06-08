@@ -1,11 +1,10 @@
 ---
-title: Papers That Made Me Think
-date: 2025-06-09
+title: Bookmarked
 pinned: true
-excerpt: A curated, ever-growing list of research papers worth your time.
+excerpt: Papers, articles, and anything else worth saving, a living list of things I keep coming back to.
 ---
 
-A living document. Every time I read a paper that breaks my mental model, it goes here.
+A living document. Papers, articles, videos, tools - anything worth saving goes here.
 
 ---
 

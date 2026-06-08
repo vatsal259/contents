@@ -1,6 +1,6 @@
 ---
 title: "Embabel Agent Framework: Build Smarter AI Agents on the JVM"
-date: 2025-05-21
+date: 2026-05-21
 excerpt: A deep-dive into Embabel - the JVM-native agent framework that replaces brittle workflows with type-driven, goal-oriented AI planning. Learn the core concepts, write your first agent, and understand why it's a step ahead of LangGraph, CrewAI, and similar tools.
 ---
 
