@@ -1,7 +1,7 @@
 ---
-title: docube-db - Prefix Prune for Code Lookup, Zero Infrastructure
+title: docube-db &#58; A Prefix Prune for Code Lookup, Zero Infrastructure 
 date: 2026-06-22
-excerpt: A small Java library that finds the right invoice, serial, or part code when the input is almost right — using a chunk trie to prune and Levenshtein to rank. Open source on GitHub.
+excerpt: A small Java library that finds the right invoice, serial, or part code when the input is almost right using a chunk trie to prune and Levenshtein to rank. Open source on GitHub.
 github: https://github.com/vatsal259/docube-db
 ---
 
@@ -21,12 +21,12 @@ Result:      INV-2024-IND-88492  (score ≈ 0.94)
 
 ## Why this problem keeps showing up
 
-Structured codes — invoice IDs, shipment numbers, serials, part numbers, license keys — share a pattern: a **prefix** encodes context (region, year, product line) and a **suffix** encodes identity. When input is wrong, it is usually *almost* right: one swapped character, a misread `Z` for `2`, a missing dash.
+Structured codes - invoice IDs, shipment numbers, serials, part numbers, license keys - share a pattern: a **prefix** encodes context (region, year, product line) and a **suffix** encodes identity. When input is wrong, it is usually *almost* right: one swapped character, a misread `Z` for `2`, a missing dash.
 
 | Approach | Strength | Weakness on fuzzy codes |
 |----------|----------|-------------------------|
 | Hash map / `HashSet` | O(1) exact lookup | Zero tolerance for typos |
-| Linear scan + edit distance | Finds close matches | O(n) per query — painful at 500k rows |
+| Linear scan + edit distance | Finds close matches | O(n) per query - painful at 500k rows |
 | Full-text search (Elasticsearch, etc.) | Great for words in documents | Built for tokenized text, not whole-code similarity |
 | **docube-db** | Prunes by prefix, then scores survivors | Prefix-first; not for semantic or random-string search |
 
@@ -36,9 +36,9 @@ docube-db is deliberately narrow: **fast fuzzy lookup over prefix-heavy code lis
 
 ## The idea behind the index
 
-Back in 2021 I read about how Elasticsearch uses **inverted indexes** — the index at the back of a textbook, but for documents. Type a word, jump to matching pages without reading everything. That shortcut works because text splits into words.
+Back in 2021 I read about how Elasticsearch uses **inverted indexes** - the index at the back of a textbook, but for documents. Type a word, jump to matching pages without reading everything. That shortcut works because text splits into words.
 
-Codes do not work that way. `INV-2024-IND-8849Z` is one string with a single typo, not a bag of keywords. The same instinct still applies: **do not read the whole dataset**. docube-db keeps a different shaped index — a **trie of fixed-size code chunks** — so strings that share a prefix share a branch in the tree.
+Codes do not work that way. `INV-2024-IND-8849Z` is one string with a single typo, not a bag of keywords. The same instinct still applies: **do not read the whole dataset**. docube-db keeps a different shaped index - a **trie of fixed-size code chunks** - so strings that share a prefix share a branch in the tree.
 
 | | Inverted index (Elasticsearch) | docube-db |
 |---|---|---|
@@ -88,8 +88,8 @@ flowchart LR
     F --> S[sort + limit]
 ```
 
-1. **Recall** — walk the trie to collect a small set of candidate line numbers. How aggressively you explore fuzzy branches depends on the search mode.
-2. **Rerank** — read each candidate from disk via byte offsets, score the full string, filter by `minScore`, sort by score (tie-break on line number), return the top `limit` hits.
+1. **Recall** - walk the trie to collect a small set of candidate line numbers. How aggressively you explore fuzzy branches depends on the search mode.
+2. **Rerank** - read each candidate from disk via byte offsets, score the full string, filter by `minScore`, sort by score (tie-break on line number), return the top `limit` hits.
 
 ### Walkthrough: one typo on the last chunk
 
@@ -100,11 +100,11 @@ Catalog: `INV-2024-IND-88492` (line 1). Query: `INV-2024-IND-8849Z`.
 | Normalize | Query becomes `INV-2024-IND-8849Z` (uppercase, dashes unified) |
 | Chunk | `["INV-","2024","-IND","-884","9Z"]` vs stored `["INV-","2024","-IND","-884","92"]` |
 | Trie walk | Exact match through `-884`; break on last chunk `9Z` vs `92` |
-| `TREE_UNTIL_BREAK` | At break node, score sibling `92` — above `minChunkScore` (0.25) → recall line 1 |
+| `TREE_UNTIL_BREAK` | At break node, score sibling `92` - above `minChunkScore` (0.25) → recall line 1 |
 | Rerank | Full-string Levenshtein similarity ≈ 0.94 |
 | Result | `SearchHit{ lineNo=1, text="INV-2024-IND-88492", score≈0.94 }` |
 
-Recall cost scales with trie nodes visited — a slice of the catalog — not total line count. Rerank cost is `candidates × Levenshtein`, and candidates are usually dozens, not hundreds of thousands.
+Recall cost scales with trie nodes visited - a slice of the catalog - not total line count. Rerank cost is `candidates × Levenshtein`, and candidates are usually dozens, not hundreds of thousands.
 
 ### Scoring
 
@@ -138,7 +138,7 @@ DocubeDB db = new DocubeDB("/data/codes");
 // Create a collection (chunkSize = 4 chars) and load a file in one step
 DocubeFile invoices = db.createFileFromRecords("invoices", 4, Path.of("invoices.txt"));
 
-// Default fuzzy search — great for a single scanner/OCR typo
+// Default fuzzy search - great for a single scanner/OCR typo
 List<SearchHit> hits = invoices.search(
         "INV-2024-IND-8849Z",
         5,      // limit
@@ -156,7 +156,7 @@ System.out.println(best.getText() + " @ " + best.getScore());
 
 | Method | Best for |
 |--------|----------|
-| `createFileFromRecords(name, chunkSize, file)` | First-time load — create + ingest in one step |
+| `createFileFromRecords(name, chunkSize, file)` | First-time load - create + ingest in one step |
 | `ingest(file)` | Bulk append from an export (indexes saved once at the end) |
 | `insert(code)` | Add one code (writes to disk on every call) |
 
@@ -172,7 +172,7 @@ file.ingest(Path.of("batch.txt"), IngestOptions.defaults().withSkipDuplicates(tr
 file.insert("INV-2024-IND-88500");
 ```
 
-`IngestResult` reports `insertedCount`, `skippedEmptyCount`, `skippedDuplicateCount`. Prefer `ingest()` for bulk — `insert()` rewrites indexes after every record.
+`IngestResult` reports `insertedCount`, `skippedEmptyCount`, `skippedDuplicateCount`. Prefer `ingest()` for bulk - `insert()` rewrites indexes after every record.
 
 ---
 
@@ -191,27 +191,27 @@ Modes differ only in the recall step. Everything else is shared.
 // Autocomplete-style prefix listing
 invoices.search("INV-2024", 20, 0.0, SearchMode.PREFIX_STRICT);
 
-// Harder noise — keep 4 candidate paths per step
+// Harder noise - keep 4 candidate paths per step
 invoices.search("ACBD-EFGH", 5, 0.7, SearchMode.BEAM_WALK,
         SearchOptions.defaults().withBeamWidth(4));
 
-// Strict equality (pass normalized form — stored values are normalized)
+// Strict equality (pass normalized form - stored values are normalized)
 invoices.search("INV-2024-IND-88492", 1, 0.0, SearchMode.EXACT);
 ```
 
-**Mode trade-off example** — catalog `[ABCD-EFGH, ABCE-EFGH]`, query `ACBD-EFGH` (transposed), `chunkSize = 2`:
+**Mode trade-off example** - catalog `[ABCD-EFGH, ABCE-EFGH]`, query `ACBD-EFGH` (transposed), `chunkSize = 2`:
 
 | Mode | Outcome |
 |------|---------|
-| `PREFIX_STRICT` | Breaks early — little or nothing returned |
-| `TREE_UNTIL_BREAK` | One fuzzy peek at the break — may miss the right row |
+| `PREFIX_STRICT` | Breaks early - little or nothing returned |
+| `TREE_UNTIL_BREAK` | One fuzzy peek at the break - may miss the right row |
 | `BEAM_WALK` (beamWidth=4) | Keeps both `ABCD` and `ABCE` paths alive → finds `ABCD-EFGH` |
 
 ### Tunables
 
 | Parameter | Where | Default | Effect |
 |-----------|-------|---------|--------|
-| `chunkSize` | set at `createFile` | — | Trie granularity (chars per chunk) |
+| `chunkSize` | set at `createFile` | - | Trie granularity (chars per chunk) |
 | `minChunkScore` | `SearchOptions` | `0.25` | How fuzzy a trie chunk match may be during recall |
 | `beamWidth` | `SearchOptions` | `3` | Paths kept per step (`BEAM_WALK` only) |
 | `minScore` | `search(...)` | caller | Drop full-string matches below this |
@@ -243,7 +243,7 @@ Open a collection and docube **self-heals**: if the trie line count or offset ar
 1. `trim()` leading/trailing whitespace
 2. `toUpperCase()`
 3. remove all internal whitespace
-4. unify dash variants (`–`, `—`, `−`) → ASCII `-`
+4. unify dash variants (`–`, `-`, `−`) → ASCII `-`
 
 Custom rules: implement `Normalizer`, pass to `DocubeDB`. Use `IdentityNormalizer` for case-sensitive needs.
 
@@ -264,7 +264,7 @@ com.docube.scoring      → LevenshteinScorer (pluggable)
 com.docube.storage      → FileMeta, LineIndex, RecordReader
 ```
 
-Package layout matches the [README](https://github.com/vatsal259/docube-db#layout). To add a search mode: new sub-package implementing `TrieRecallStrategy`, one `SearchMode` enum value, one line in `SearchStrategies` — same pattern as the four modes in [`src/main/java/com/docube/mode/`](https://github.com/vatsal259/docube-db/tree/main/src/main/java/com/docube/mode).
+Package layout matches the [README](https://github.com/vatsal259/docube-db#layout). To add a search mode: new sub-package implementing `TrieRecallStrategy`, one `SearchMode` enum value, one line in `SearchStrategies` - same pattern as the four modes in [`src/main/java/com/docube/mode/`](https://github.com/vatsal259/docube-db/tree/main/src/main/java/com/docube/mode).
 
 ---
 
@@ -273,7 +273,7 @@ Package layout matches the [README](https://github.com/vatsal259/docube-db#layou
 **Works well when:**
 
 - Strings share prefixes (region, year, product line, type code)
-- Input is nearly correct — typos, OCR noise, not random gibberish
+- Input is nearly correct - typos, OCR noise, not random gibberish
 - You need offline, explainable matching on a laptop, kiosk, or edge device
 - List size is thousands to low millions
 - You want zero ops: no cluster, no connection string, no schema migration
@@ -289,26 +289,26 @@ Package layout matches the [README](https://github.com/vatsal259/docube-db#layou
 
 ## Key Takeaways
 
-- **Prune with structure, rank with similarity** — a chunk trie narrows candidates; Levenshtein picks the winner. Never scan the whole catalog on every query.
-- **No infrastructure tax** — plain files, one jar. Drop a folder on disk and go.
-- **Modes trade recall for speed** — `TREE_UNTIL_BREAK` for everyday typos, `BEAM_WALK` when input is noisier, `PREFIX_STRICT` for autocomplete, `EXACT` as a hard gate.
-- **Self-healing indexes** — `.data` is the source of truth; derived files rebuild on open if they drift.
-- **Honest limits** — built for prefix-heavy code lists, not for semantic search at web scale.
-- **Open source** — source, docs, and issues on GitHub.
+- **Prune with structure, rank with similarity** - a chunk trie narrows candidates; Levenshtein picks the winner. Never scan the whole catalog on every query.
+- **No infrastructure tax** - plain files, one jar. Drop a folder on disk and go.
+- **Modes trade recall for speed** - `TREE_UNTIL_BREAK` for everyday typos, `BEAM_WALK` when input is noisier, `PREFIX_STRICT` for autocomplete, `EXACT` as a hard gate.
+- **Self-healing indexes** - `.data` is the source of truth; derived files rebuild on open if they drift.
+- **Honest limits** - built for prefix-heavy code lists, not for semantic search at web scale.
+- **Open source** - source, docs, and issues on GitHub.
 
 ---
 
 ## Links
 
-All public docs and source live on the [docube-db repo](https://github.com/vatsal259/docube-db) — README is the canonical reference.
+All public docs and source live on the [docube-db repo](https://github.com/vatsal259/docube-db) - README is the canonical reference.
 
 | Resource | URL |
 |----------|-----|
 | **Repository** | [github.com/vatsal259/docube-db](https://github.com/vatsal259/docube-db) |
-| **README** — quick start, API, search modes, tunables | [github.com/vatsal259/docube-db#readme](https://github.com/vatsal259/docube-db#readme) |
+| **README** - quick start, API, search modes, tunables | [github.com/vatsal259/docube-db#readme](https://github.com/vatsal259/docube-db#readme) |
 | **Source** | [github.com/vatsal259/docube-db/tree/main/src](https://github.com/vatsal259/docube-db/tree/main/src) |
 | **Issues** | [github.com/vatsal259/docube-db/issues](https://github.com/vatsal259/docube-db/issues) |
 
-Clone, build, point `DocubeDB` at a text file of codes, and search with a deliberate typo — you will see the trie recall and rerank pipeline in action.
+Clone, build, point `DocubeDB` at a text file of codes, and search with a deliberate typo - you will see the trie recall and rerank pipeline in action.
 
 Questions, bug reports, or ideas for a new search mode? [Open an issue](https://github.com/vatsal259/docube-db/issues).
