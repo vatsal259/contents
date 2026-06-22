@@ -1,5 +1,5 @@
 ---
-title: docube-db `:` A Prefix Prune for Code Lookup, Zero Infrastructure 
+title: docube-db &colon A Prefix Prune for Code Lookup, Zero Infrastructure 
 date: 2026-06-22
 excerpt: A small Java library that finds the right invoice, serial, or part code when the input is almost right using a chunk trie to prune and Levenshtein to rank. Open source on GitHub.
 github: https://github.com/vatsal259/docube-db
