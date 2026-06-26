@@ -5,6 +5,7 @@ excerpt: A small Java library that finds the right invoice, serial, or part code
 github: https://github.com/vatsal259/docube-db
 ---
 
+**TRY IT YOURSELF:** [vatsal259.github.io/docube-db/](https://vatsal259.github.io/docube-db/)
 **GitHub:** [github.com/vatsal259/docube-db](https://github.com/vatsal259/docube-db)
 
 You have half a million invoice numbers in a text file. A barcode scanner misreads one character. A warehouse operator types a serial number from a smudged label. An OCR pipeline drops a dash. Exact lookup fails. Comparing against every line is too slow. You do not want to spin up Elasticsearch for a laptop-side validation step.
