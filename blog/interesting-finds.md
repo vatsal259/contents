@@ -1,5 +1,5 @@
 ---
-title: Bookmarked
+title: My “I’ll Come Back to This” Collection
 pinned: true
 excerpt: Papers, articles, and anything else worth saving, a living list of things I keep coming back to.
 ---
