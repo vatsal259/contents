@@ -181,7 +181,6 @@ Then drill with the **Topic Atlas** under each part (every syllabus keyword + do
 
 # Part I
 
-<a id="part-i"></a>
 
 ## Module 0 — Build Tools & Project Setup
 
@@ -556,7 +555,6 @@ Match Boot version to Java: Boot 3.x requires Java 17 minimum; Boot 2.x is legac
 
 # Part II
 
-<a id="part-ii"></a>
 
 ## Module 1 — Core Spring Framework
 
@@ -1521,7 +1519,6 @@ SmartLifecycle extends lifecycle control with autoStartup, phase ordering, and s
 
 # Part III
 
-<a id="part-iii"></a>
 
 ## Module 2 — Spring Boot Fundamentals
 
@@ -2141,7 +2138,6 @@ LocaleResolver determines current Locale per HTTP request—AcceptHeaderLocaleRe
 
 # Part IV
 
-<a id="part-iv"></a>
 
 ## Module 3 — Web Layer & RESTful Services
 
@@ -3154,7 +3150,6 @@ Enabling response compression via `server.compression.enabled=true` gzip-compres
 
 # Part V
 
-<a id="part-v"></a>
 
 ## Module 4 — Persistence Layer (Spring Data JPA)
 
@@ -4529,7 +4524,6 @@ Cache eviction removes stale entries via TTL expiration (time-based), size-based
 
 # Part VI
 
-<a id="part-vi"></a>
 
 ## Module 5 — Spring Security 6.x+
 
@@ -5534,7 +5528,6 @@ Passkeys and WebAuthn enable passwordless authentication using public-key crypto
 
 # Part VII
 
-<a id="part-vii"></a>
 
 ## Module 6 — Testing & Quality Assurance
 
@@ -6206,7 +6199,6 @@ Spring Test Framework caches ApplicationContext across test classes sharing iden
 
 # Part VIII
 
-<a id="part-viii"></a>
 
 ## Module 7 — Microservices & Distributed Systems
 
@@ -7145,7 +7137,6 @@ Coordinate across services (Redis, Zookeeper). Cross-service ACID transactions a
 
 # Part IX
 
-<a id="part-ix"></a>
 
 ## Module 8 — Advanced Features & Performance (2026)
 
@@ -8344,7 +8335,6 @@ Generate server from spec.
 
 # Part X
 
-<a id="part-x"></a>
 
 ## Capstone — Enterprise Portfolio API
 
@@ -8579,7 +8569,6 @@ Users, portfolios, holdings, transactions.
 
 # Part XI
 
-<a id="part-xi"></a>
 
 ## Quick reference — every `@` annotation (Spring Boot)
 
@@ -9122,7 +9111,6 @@ OpenAPI annotations from swagger-core—`@Schema` on DTO fields documents types,
 
 # Part XII
 
-<a id="part-xii"></a>
 
 ## Interview power tips
 
@@ -9226,9 +9214,11 @@ GraalVM native images offer sub-second startup and lower RSS for serverless and 
 
 
 
-# Part XIII — Write your own starter (auto-configuration mastery)
+# Part XIII
 
-<a id="part-xiii"></a>
+## Write your own starter (auto-configuration mastery)
+
+
 
 > **Learning goal:** stop being a consumer of Boot magic — author `@AutoConfiguration`, condition correctly, and prove it with `ApplicationContextRunner`.
 
@@ -9299,9 +9289,11 @@ THEN register AcmeMetricsCustomizer @Bean
 
 ---
 
-# Part XIV — Configuration & Actuator deep dive
+# Part XIV
 
-<a id="part-xiv"></a>
+## Configuration & Actuator deep dive
+
+
 
 > **Learning goal:** predict which property wins, bind typed config correctly, and operate Actuator like production.
 
@@ -9390,9 +9382,11 @@ Cardinality rule: **never** put `userId` in metric tags.
 
 ---
 
-# Part XV — Persistence matrices & battle scenarios
+# Part XV
 
-<a id="part-xv"></a>
+## Persistence matrices & battle scenarios
+
+
 
 > **Learning goal:** reason about transactions, isolation, N+1, and locking with grids — not slogans.
 
@@ -9480,9 +9474,11 @@ Never rename/drop in one shot under rolling deploys.
 
 ---
 
-# Part XVI — Security internals (filter chain → JWT → method security)
+# Part XVI
 
-<a id="part-xvi"></a>
+## Security internals (filter chain → JWT → method security)
+
+
 
 > **Learning goal:** debug 401/403 like an engineer — know the filter chain, JWT resource server path, and SecurityContext propagation.
 
@@ -9559,9 +9555,11 @@ Virtual threads amplify "I created a million threads" thinking — don't put hea
 
 ---
 
-# Part XVII — Web advanced · conversion, HTTP clients, async, GraphQL
+# Part XVII
 
-<a id="part-xvii"></a>
+## Web advanced · conversion, HTTP clients, async, GraphQL
+
+
 
 > **Learning goal:** own the full MVC pipeline and modern outbound HTTP — plus GraphQL as a first-class alternative API style.
 
@@ -9619,9 +9617,11 @@ GraphQL is not "REST with one endpoint" — it is a **schema + resolver** model.
 
 ---
 
-# Part XVIII — Messaging, SSL, Docker Compose & Boot 3 migration
+# Part XVIII
 
-<a id="part-xviii"></a>
+## Messaging, SSL, Docker Compose & Boot 3 migration
+
+
 
 > **Learning goal:** cover production surfaces the atlas under-taught: brokers, TLS bundles, local orchestration, and Boot 2→3.
 
@@ -9688,9 +9688,11 @@ Dev and CI should share the same Postgres image tag as prod.
 
 ---
 
-# Part XIX — Labs catalog (do these with the atlas)
+# Part XIX
 
-<a id="part-xix"></a>
+## Labs catalog (do these with the atlas)
+
+
 
 > **Learning goal:** convert reading into muscle memory. Each lab maps to earlier parts.
 
@@ -9714,9 +9716,11 @@ Dev and CI should share the same Postgres image tag as prod.
 
 ---
 
-# Part XX — Capstone specification (real project brief)
+# Part XX
 
-<a id="part-xx"></a>
+## Capstone specification (real project brief)
+
+
 
 > **Learning goal:** ship a portfolio-grade API with acceptance tests, not a checkbox fantasy.
 
@@ -9818,9 +9822,11 @@ erDiagram
 **Official docs:** [Boot](https://docs.spring.io/spring-boot/reference/) · [Security](https://docs.spring.io/spring-security/reference/) · [Data JPA](https://docs.spring.io/spring-data/jpa/reference/)
 
 
-# Part XXI — Remaining architect surfaces (JdbcClient, Kotlin, CDS/CRaC, Actuator custom, AuthorizationManager)
+# Part XXI
 
-<a id="part-xxi"></a>
+## Remaining architect surfaces (JdbcClient, Kotlin, CDS/CRaC, Actuator custom, AuthorizationManager)
+
+
 
 > **Learning goal:** close the last gaps a 2026 Spring Boot architect is expected to know by name.
 
