@@ -1,7 +1,6 @@
 ---
 title: "Spring Boot Ultra: Main Character Energy for Your Backend"
 date: 2026-08-08
-pinned: true
 excerpt: The ultra Spring Boot textbook - Parts I–XXI with deep lessons, matrices, mermaid diagrams, labs, architect chapters (starters, Actuator, security, GraphQL, SSL, JdbcClient, CRaC), plus a 972-topic atlas with official docs links.
 ---
 
