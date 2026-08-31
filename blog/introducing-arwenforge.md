@@ -1,7 +1,7 @@
 ---
 title: "ArwenForge: Profile-Based RBAC for Multi-Agent MCP Servers"
 date: 2026-08-30
-excerpt: One MCP endpoint, many agents. ArwenForge tags tools, resources, prompts, and delegates with profiles — then enforces least-privilege discovery and fail-closed execution on the JVM.
+excerpt: One MCP endpoint, many agents. ArwenForge is a Java 21 library: tag tools, resources, prompts, and delegates with profiles, then enforce least-privilege discovery and fail-closed execution.
 github: https://github.com/vatsal259/ArwenForge
 ---
 
@@ -21,7 +21,7 @@ The important distinction is that ArwenForge does not implement retrieval, embed
                                   identity + roles + profiles
 ```
 
-This article explains the design, runtime behavior, configuration model, and operating limits. For exhaustive diagrams and class-level detail, see the [technical design](https://github.com/vatsal259/ArwenForge/blob/main/design/DESIGN.md).
+This article explains the design, runtime behavior, configuration model, and operating limits. The GitHub repository is the library only — there is no in-repo demo server. Install from [getting started](https://github.com/vatsal259/ArwenForge/blob/main/docs/getting-started.md); the public README lists modules and sample config.
 
 ---
 
@@ -518,7 +518,17 @@ It is not intended to be:
 - A defense against all prompt injection. It limits which tools a manipulated model can reach; it does not make model output safe.
 - A non-JVM or Quarkus adapter in version 1.0.
 
-Compatibility target is Java 21+, Spring Boot 3.4.x, Spring AI MCP 1.0.x, and servlet `/mcp` JSON-RPC transport. API-key-only deployments do not require a JWT decoder.
+Compatibility target is Java 21+, Spring Boot 3.4.x, Spring AI MCP 1.0.x, and servlet `/mcp` JSON-RPC transport. API-key-only deployments do not require a JWT decoder. Version 1.0.0 is Apache-2.0.
+
+Maven modules:
+
+| Module | Purpose |
+|---|---|
+| `arwen-forge-core` | Access resolver, capability index, blast radius, approval SPI |
+| `arwen-forge-config` | YAML loaders, merge/overlay, validation |
+| `arwen-forge-agent` | Delegation and session managers |
+| `arwen-forge-spring` | Boot auto-config, MCP filter, production ops |
+| `arwen-forge-cli` | Offline `validate`, `plan`, `blast-radius` |
 
 ---
 
@@ -530,4 +540,4 @@ Compatibility target is Java 21+, Spring Boot 3.4.x, Spring AI MCP 1.0.x, and se
 4. **Identity is external.** API keys and validated JWTs provide identity; ArwenForge maps identity to policy.
 5. **Policy can be operated.** YAML validates at startup, audits decisions, supports optional approval/rate-limit/reload controls, and yields CI blast-radius reports.
 
-[GitHub](https://github.com/vatsal259/ArwenForge) · [Getting started](https://github.com/vatsal259/ArwenForge/blob/main/docs/getting-started.md) · [Technical design](https://github.com/vatsal259/ArwenForge/blob/main/design/DESIGN.md)
+[GitHub](https://github.com/vatsal259/ArwenForge) · [Getting started](https://github.com/vatsal259/ArwenForge/blob/main/docs/getting-started.md) · [Compatibility](https://github.com/vatsal259/ArwenForge/blob/main/docs/compatibility.md)
