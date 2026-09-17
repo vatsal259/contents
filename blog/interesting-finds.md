@@ -10,6 +10,9 @@ A living document. Papers, articles, videos, tools - anything worth saving goes 
 
 ## 2026
 
+### [Introducing system one models and jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev)
+**Topics:** Reinforcement Learning for Calibrated Decisions · Artificial Intelligence
+
 ### [SkillAdaptor: Self-Adapting Skills for LLM Agents from Trajectories](https://huggingface.co/papers/2606.01311)
 **Topics:** LLM Agents · Skill Adaptation · Failure Attribution · Training-Free Learning · Long-Horizon Tasks
 
