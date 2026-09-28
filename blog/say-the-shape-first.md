@@ -1,7 +1,7 @@
 ---
-title: Say the Shape First
+title: "What Kind of Agent to Build: Workflows, LangGraph, MCP, and A2A"
 date: 2026-09-29
-excerpt: Walk two programs that share the same tools and tell different stories. Then name the shape, the library, and the failure mode before you name a framework.
+excerpt: "A guide to the main agent designs. When a fixed workflow is enough, when you need a tool-calling agent in LangGraph, how that differs from LangChain, and when to connect systems with MCP or agent-to-agent (A2A)."
 ---
 
 Someone asks how you would build it. The weak answer comes out fast.
